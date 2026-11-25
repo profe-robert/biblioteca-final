@@ -1,0 +1,27 @@
+server:
+    port: 8085
+
+spring:
+    application:
+        name: biblioteca-api
+    datasource:
+        url: jdbc:sqlite:biblioteca.db
+        driver-class-name: org.sqlite.JDBC
+        hikari:
+            maximum-pool-size: 1 # SQLite admite un escritor concurrente; evita bloqueos SQLITE_BUSY
+    jpa:
+        hibernate:
+            ddl-auto: update
+            show-sql: false
+        properties:
+            hibernate:
+                format_sql: true
+
+application:
+    security:
+        jwt:
+            # Clave HS256 en Base64 (256 bits mínimo)
+            secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+            expiration: 900000          # 15 minutos en milisegundos
+            refresh-token:
+                expiration: 604800000     # 7 días en milisegundos
